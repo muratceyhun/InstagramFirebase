@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         return button
     }()
@@ -20,7 +19,6 @@ class ViewController: UIViewController {
     
     let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.placeholder = "Email"
@@ -29,7 +27,6 @@ class ViewController: UIViewController {
     
     let userNameTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.placeholder = "Username"
@@ -38,7 +35,6 @@ class ViewController: UIViewController {
     
     let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
@@ -49,9 +45,9 @@ class ViewController: UIViewController {
     let signupButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+//        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.backgroundColor = UIColor.rgbConverter(red: 149, green: 204, blue: 244, alpha: 1)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -71,38 +67,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(plusPhotoButton)
-        
-        plusPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
+        setupPlusPhotoButton()
+        setupFields()
+    }
+    
+    
+    func setupPlusPhotoButton() {
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        plusPhotoButton.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-//        view.addSubview(emailTextField)
-//
-//        NSLayoutConstraint.activate([
-//            emailTextField.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 16),
-//            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            emailTextField.heightAnchor.constraint(equalToConstant: 50),
-//            emailTextField.widthAnchor.constraint(equalToConstant: 300)
-//        ])
-
+        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, trailing: nil, bottom: nil, topPadding: 24, leadingPadding: 0, trailingPadding: 0, bottomPadding: 0, width: 0, height: 150)
+    }
+    
+    func setupFields() {
         
         let stackView: UIStackView = {
            let stack = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signupButton])
             stack.distribution = .fillEqually
             stack.axis = .vertical
             stack.spacing = 10
-            stack.translatesAutoresizingMaskIntoConstraints = false
             return stack
         }()
         
         
         view.addSubview(stackView)
-        
-        stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 240).isActive = true
-        
+        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: nil, topPadding: 20, leadingPadding: 24, trailingPadding: -24, bottomPadding: 0, width: 0, height: 224)
+
     }
 
 

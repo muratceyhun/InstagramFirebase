@@ -13,6 +13,7 @@
 		43B070A22A7D5B050020644F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A02A7D5B050020644F /* Main.storyboard */; };
 		43B070A42A7D5B060020644F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A32A7D5B060020644F /* Assets.xcassets */; };
 		43B070A72A7D5B060020644F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A52A7D5B060020644F /* LaunchScreen.storyboard */; };
+		43B070B02A7FAD8B0020644F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B070AF2A7FAD8B0020644F /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		43B070A32A7D5B060020644F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43B070A62A7D5B060020644F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43B070A82A7D5B060020644F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43B070AF2A7FAD8B0020644F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		43B070992A7D5B050020644F /* InstagramFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				43B070AE2A7FAD7D0020644F /* Utilities */,
 				43B0709A2A7D5B050020644F /* AppDelegate.swift */,
 				43B0709C2A7D5B050020644F /* SceneDelegate.swift */,
 				43B0709E2A7D5B050020644F /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				43B070A82A7D5B060020644F /* Info.plist */,
 			);
 			path = InstagramFirebase;
+			sourceTree = "<group>";
+		};
+		43B070AE2A7FAD7D0020644F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				43B070AF2A7FAD8B0020644F /* Extensions.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 				43B0709F2A7D5B050020644F /* ViewController.swift in Sources */,
 				43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */,
 				43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */,
+				43B070B02A7FAD8B0020644F /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
