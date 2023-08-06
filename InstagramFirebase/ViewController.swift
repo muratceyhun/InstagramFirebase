@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -22,14 +24,28 @@ class ViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.placeholder = "Email"
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return textField
     }()
+    @objc func handleTextInputChange () {
+        let formValid = emailTextField.hasText && userNameTextField.hasText && passwordTextField.hasText
+    
+        if formValid {
+            signupButton.backgroundColor = UIColor.rgbConverter(red: 17, green: 154, blue: 237, alpha: 1)
+            signupButton.isEnabled = true
+        } else {
+            signupButton.backgroundColor = UIColor.rgbConverter(red: 149, green: 204, blue: 244, alpha: 1)
+        }
+        
+    }
     
     let userNameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.placeholder = "Username"
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+
         return textField
     }()
     
@@ -39,6 +55,8 @@ class ViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.placeholder = "Password"
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+
         return textField
     }()
     
@@ -46,7 +64,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         button.setTitle("Sign Up", for: .normal)
-//        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.isEnabled = false
         button.backgroundColor = UIColor.rgbConverter(red: 149, green: 204, blue: 244, alpha: 1)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -55,9 +73,19 @@ class ViewController: UIViewController {
     }()
     
     @objc func handleSignUp() {
-        print("12112121221")
-    }
         
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let username = userNameTextField.text else {return}
+        Auth.auth().createUser(withEmail: email, password: password) { user, err in
+            if let err = err {
+                print("ERROR", err)
+                return
+            }
+            print("Created user successfully...", user?.user.uid ?? "")
+        }
+    }
+    
     
     @objc fileprivate func handleAddPhoto() {
         print("****")
