@@ -18,6 +18,8 @@
 		43B070B72A7FCAB00020644F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 43B070B62A7FCAB00020644F /* FirebaseDatabase */; };
 		43B070B92A7FCAB00020644F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 43B070B82A7FCAB00020644F /* FirebaseStorage */; };
 		43B070BB2A7FF8790020644F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43B070BA2A7FF8790020644F /* GoogleService-Info.plist */; };
+		43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B209192A81581A00F4C3CE /* MainTabBarController.swift */; };
+		43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B2091B2A8159C200F4C3CE /* UserProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		43B070A82A7D5B060020644F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43B070AF2A7FAD8B0020644F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		43B070BA2A7FF8790020644F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		43B209192A81581A00F4C3CE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		43B2091B2A8159C200F4C3CE /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				43B0709A2A7D5B050020644F /* AppDelegate.swift */,
 				43B0709C2A7D5B050020644F /* SceneDelegate.swift */,
 				43B0709E2A7D5B050020644F /* ViewController.swift */,
+				43B209192A81581A00F4C3CE /* MainTabBarController.swift */,
+				43B2091B2A8159C200F4C3CE /* UserProfileController.swift */,
 				43B070A02A7D5B050020644F /* Main.storyboard */,
 				43B070A32A7D5B060020644F /* Assets.xcassets */,
 				43B070A52A7D5B060020644F /* LaunchScreen.storyboard */,
@@ -169,6 +175,8 @@
 			files = (
 				43B0709F2A7D5B050020644F /* ViewController.swift in Sources */,
 				43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */,
+				43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */,
+				43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */,
 				43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */,
 				43B070B02A7FAD8B0020644F /* Extensions.swift in Sources */,
 			);
