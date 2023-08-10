@@ -11,9 +11,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let layout = UICollectionViewLayout()
+        let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
-        userProfileController.collectionView.backgroundColor = .gray
         
         let navController = UINavigationController(rootViewController: userProfileController)
    

@@ -20,6 +20,7 @@
 		43B070BB2A7FF8790020644F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43B070BA2A7FF8790020644F /* GoogleService-Info.plist */; };
 		43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B209192A81581A00F4C3CE /* MainTabBarController.swift */; };
 		43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B2091B2A8159C200F4C3CE /* UserProfileController.swift */; };
+		43BAA70C2A840C2800FD1D7D /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BAA70B2A840C2800FD1D7D /* UserProfileHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		43B070BA2A7FF8790020644F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		43B209192A81581A00F4C3CE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		43B2091B2A8159C200F4C3CE /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		43BAA70B2A840C2800FD1D7D /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +72,12 @@
 		43B070992A7D5B050020644F /* InstagramFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				43BAA70A2A840C1600FD1D7D /* UserProfile */,
 				43B070AE2A7FAD7D0020644F /* Utilities */,
 				43B0709A2A7D5B050020644F /* AppDelegate.swift */,
 				43B0709C2A7D5B050020644F /* SceneDelegate.swift */,
 				43B0709E2A7D5B050020644F /* ViewController.swift */,
 				43B209192A81581A00F4C3CE /* MainTabBarController.swift */,
-				43B2091B2A8159C200F4C3CE /* UserProfileController.swift */,
 				43B070A02A7D5B050020644F /* Main.storyboard */,
 				43B070A32A7D5B060020644F /* Assets.xcassets */,
 				43B070A52A7D5B060020644F /* LaunchScreen.storyboard */,
@@ -91,6 +93,15 @@
 				43B070AF2A7FAD8B0020644F /* Extensions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		43BAA70A2A840C1600FD1D7D /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				43BAA70B2A840C2800FD1D7D /* UserProfileHeader.swift */,
+				43B2091B2A8159C200F4C3CE /* UserProfileController.swift */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43B0709F2A7D5B050020644F /* ViewController.swift in Sources */,
+				43BAA70C2A840C2800FD1D7D /* UserProfileHeader.swift in Sources */,
 				43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */,
 				43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */,
 				43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */,
