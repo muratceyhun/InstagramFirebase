@@ -10,7 +10,6 @@ import Firebase
 
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +18,30 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         fetchUser()
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(handleLogOut))
+    }
+    
+    @objc fileprivate func handleLogOut() {
+        print("Handle Set")
+        
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        present(alertController, animated: true)
+        let alertAction1 = UIAlertAction(title: "Log out", style: .destructive) { _ in
+            print("Log Out")
+            do {
+                try Auth.auth().signOut()
+
+            } catch let err {
+                print("ERROR", err)
+            }
+        }
+        let alertAction2 = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            print("Cancel")
+        }
+        alertController.addAction(alertAction1)
+        alertController.addAction(alertAction2)
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -69,13 +92,11 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
-  
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 200)
     }
 }
-
 
 
 struct User {

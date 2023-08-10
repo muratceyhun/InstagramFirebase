@@ -156,7 +156,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate & UINa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
+
         view.addSubview(plusPhotoButton)
         setupPlusPhotoButton()
         setupFields()
@@ -183,7 +184,5 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate & UINa
         stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: nil, topPadding: 20, leadingPadding: 24, trailingPadding: -24, bottomPadding: 0, width: 0, height: 224)
 
     }
-
-
 }
 

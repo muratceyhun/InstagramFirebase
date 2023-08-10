@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43507F252A8571AD00A23B85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43507F242A8571AD00A23B85 /* LoginViewController.swift */; };
 		43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709A2A7D5B050020644F /* AppDelegate.swift */; };
 		43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709C2A7D5B050020644F /* SceneDelegate.swift */; };
-		43B0709F2A7D5B050020644F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709E2A7D5B050020644F /* ViewController.swift */; };
+		43B0709F2A7D5B050020644F /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709E2A7D5B050020644F /* SignUpController.swift */; };
 		43B070A22A7D5B050020644F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A02A7D5B050020644F /* Main.storyboard */; };
 		43B070A42A7D5B060020644F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A32A7D5B060020644F /* Assets.xcassets */; };
 		43B070A72A7D5B060020644F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B070A52A7D5B060020644F /* LaunchScreen.storyboard */; };
@@ -24,10 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43507F242A8571AD00A23B85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		43B070972A7D5B050020644F /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B0709A2A7D5B050020644F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43B0709C2A7D5B050020644F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		43B0709E2A7D5B050020644F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		43B0709E2A7D5B050020644F /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		43B070A12A7D5B050020644F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43B070A32A7D5B060020644F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43B070A62A7D5B060020644F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43507F232A85719E00A23B85 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				43507F242A8571AD00A23B85 /* LoginViewController.swift */,
+				43B0709E2A7D5B050020644F /* SignUpController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		43B0708E2A7D5B050020644F = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +83,11 @@
 		43B070992A7D5B050020644F /* InstagramFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				43507F232A85719E00A23B85 /* Login */,
 				43BAA70A2A840C1600FD1D7D /* UserProfile */,
 				43B070AE2A7FAD7D0020644F /* Utilities */,
 				43B0709A2A7D5B050020644F /* AppDelegate.swift */,
 				43B0709C2A7D5B050020644F /* SceneDelegate.swift */,
-				43B0709E2A7D5B050020644F /* ViewController.swift */,
 				43B209192A81581A00F4C3CE /* MainTabBarController.swift */,
 				43B070A02A7D5B050020644F /* Main.storyboard */,
 				43B070A32A7D5B060020644F /* Assets.xcassets */,
@@ -184,10 +195,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43B0709F2A7D5B050020644F /* ViewController.swift in Sources */,
+				43B0709F2A7D5B050020644F /* SignUpController.swift in Sources */,
 				43BAA70C2A840C2800FD1D7D /* UserProfileHeader.swift in Sources */,
 				43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */,
 				43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */,
+				43507F252A8571AD00A23B85 /* LoginViewController.swift in Sources */,
 				43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */,
 				43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */,
 				43B070B02A7FAD8B0020644F /* Extensions.swift in Sources */,
