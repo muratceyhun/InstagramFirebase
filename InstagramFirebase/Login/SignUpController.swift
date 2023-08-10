@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class SignUpController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
