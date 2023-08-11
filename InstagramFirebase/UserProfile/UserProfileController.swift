@@ -108,7 +108,7 @@ struct User {
     
     init(dictionary: [String: Any]) {
         self.username = dictionary["username"] as? String ?? ""
-        self.profileImageURL = dictionary["profilePhotoURLL"] as? String ?? ""
+        self.profileImageURL = dictionary["profilePhotoURL"] as? String ?? ""
     }
     
 }
