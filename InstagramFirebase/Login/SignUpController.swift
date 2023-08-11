@@ -151,8 +151,19 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate & UINa
             }
         }
     }
+     
+    private lazy var logInButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attrString = NSMutableAttributedString(string: "Already have an account? ", attributes: [.foregroundColor : UIColor.lightGray])
+        attrString.append(NSAttributedString(string: "Sign In", attributes: [.foregroundColor : UIColor.rgbConverter(red: 17, green: 154, blue: 237, alpha: 1), .font : UIFont.boldSystemFont(ofSize: 16)]))
+        button.setAttributedTitle(attrString, for: .normal)
+        button.addTarget(self, action: #selector(handleLogIn), for: .touchUpInside)
+        return button
+    }()
     
-    
+    @objc fileprivate func handleLogIn() {
+        navigationController?.popViewController(animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,6 +171,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate & UINa
 
         view.addSubview(plusPhotoButton)
         setupPlusPhotoButton()
+        view.addSubview(logInButton)
+        logInButton.anchor(top: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topPadding: 0, leadingPadding: 0, trailingPadding: 0, bottomPadding: -56, width: 0, height: 40)
         setupFields()
     }
     
