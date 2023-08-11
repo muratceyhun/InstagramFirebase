@@ -23,7 +23,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     @objc fileprivate func handleLogOut() {
-        print("Handle Set")
         
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
         present(alertController, animated: true)
@@ -31,6 +30,10 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             print("Log Out")
             do {
                 try Auth.auth().signOut()
+                let logInController = LoginViewController()
+                let navController = UINavigationController(rootViewController: logInController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true)
 
             } catch let err {
                 print("ERROR", err)

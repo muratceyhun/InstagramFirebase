@@ -20,19 +20,18 @@ class MainTabBarController: UITabBarController {
                 navController.modalPresentationStyle = .fullScreen
                 self.present(navController, animated: true)
             }
-            
             return
         }
-        
+        setupViewControllers()
+    }
+    
+    func setupViewControllers() {
         let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
-        
         let navController = UINavigationController(rootViewController: userProfileController)
-   
         navController.tabBarItem.image = UIImage(named: "profile_unselected")
         navController.tabBarItem.selectedImage = UIImage(named: "profile_selected")
         tabBar.tintColor = .black
-        
         viewControllers = [navController, UIViewController()]
     }
 }
