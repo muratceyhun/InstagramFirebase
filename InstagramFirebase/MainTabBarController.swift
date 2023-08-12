@@ -8,10 +8,29 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        print(index)
+        
+        if index == 2 {
+            let layout = UICollectionViewFlowLayout()
+            let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
+            let navController2 = SpecifiedNavController(rootViewController: photoSelectorController)
+//            let navController = UINavigationController(rootViewController: photoSelectorController)
+            navController2.modalPresentationStyle = .fullScreen
+            present(navController2, animated: true)
+        }
+        return true
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.delegate = self
         if Auth.auth().currentUser == nil {
             
             DispatchQueue.main.async {

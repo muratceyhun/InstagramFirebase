@@ -17,6 +17,16 @@ extension UIColor {
     }
 }
 
+class SpecifiedNavController: UINavigationController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
 
 extension UIView {
     
