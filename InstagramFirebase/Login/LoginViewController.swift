@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     }()
     
     
-    let emailTextField: UITextField = {
+    lazy var emailTextField: UITextField = {
        let email = UITextField()
         email.placeholder = "Email"
         email.textColor = .lightGray
