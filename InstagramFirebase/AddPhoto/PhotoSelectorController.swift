@@ -36,7 +36,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     fileprivate func assetsFetchOptions() -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = 15
+        fetchOptions.fetchLimit = 40
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
         return fetchOptions
@@ -80,7 +80,13 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     @objc fileprivate func handleNext() {
-        print("NEXTTTTT")
+        
+        let photoShareController = SharePhotoController()
+        navigationController?.pushViewController(photoShareController, animated: true)
+        photoShareController.selectedImage = selectedImage
+        
+        
+        
     }
     
     
@@ -142,5 +148,12 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         print(indexPath)
         self.selectedImage = images[indexPath.item]
         collectionView.reloadData()
+        
+        
+        
+        
+        let indexPath = IndexPath(row: 0, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+        
     }
 }
