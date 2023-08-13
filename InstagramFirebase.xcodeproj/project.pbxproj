@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4301F2AB2A87EF1100D48899 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4301F2AA2A87EF1100D48899 /* PhotoSelectorController.swift */; };
+		4301F2AD2A891BB500D48899 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4301F2AC2A891BB500D48899 /* PhotoSelectorCell.swift */; };
 		43507F252A8571AD00A23B85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43507F242A8571AD00A23B85 /* LoginViewController.swift */; };
 		43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709A2A7D5B050020644F /* AppDelegate.swift */; };
 		43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709C2A7D5B050020644F /* SceneDelegate.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		4301F2AA2A87EF1100D48899 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
+		4301F2AC2A891BB500D48899 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		43507F242A8571AD00A23B85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		43B070972A7D5B050020644F /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B0709A2A7D5B050020644F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				4301F2AA2A87EF1100D48899 /* PhotoSelectorController.swift */,
+				4301F2AC2A891BB500D48899 /* PhotoSelectorCell.swift */,
 			);
 			path = AddPhoto;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */,
 				43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */,
 				43B070B02A7FAD8B0020644F /* Extensions.swift in Sources */,
+				4301F2AD2A891BB500D48899 /* PhotoSelectorCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +368,7 @@
 				DEVELOPMENT_TEAM = C7T7MNSP5C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstagramFirebase/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -392,6 +397,7 @@
 				DEVELOPMENT_TEAM = C7T7MNSP5C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstagramFirebase/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
