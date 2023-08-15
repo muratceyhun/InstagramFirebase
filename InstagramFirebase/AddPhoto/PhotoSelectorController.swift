@@ -104,9 +104,11 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         return .init(top: 1, left: 0, bottom: 0, right: 0)
     }
     
+    var header: PhotoHeader?
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! PhotoHeader
 //        header.selectedImage = selectedImage
+        self.header = header
         header.photoImageView.image = selectedImage
         
         if let selectedImage = selectedImage {

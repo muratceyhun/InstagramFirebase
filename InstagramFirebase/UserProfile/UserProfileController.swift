@@ -7,9 +7,12 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
+    var posts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,9 +20,35 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.title = Auth.auth().currentUser?.uid
         fetchUser()
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
+        collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: "cellID")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(handleLogOut))
+        
+        fetchPosts()
+    }
+    
+    
+    fileprivate func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Database.database().reference().child("posts").child(uid)
+        ref.observeSingleEvent(of: .value) { snapshot in
+//            print(snapshot.value)
+            guard let dictionaries = snapshot.value as? [String: Any] else {return}
+            dictionaries.forEach { key, value in
+                guard let dictionary = value as? [String: Any] else {return}
+//                let imageURL = dictionary["imageURL"] as? String
+//                print("IMAGE URL:", imageURL)
+//                print("Key :\(key) \n Value :\(value)")
+                let post = Post(dictionary: dictionary)
+//                print(post.imageURL)
+                self.posts.append(post)
+            }
+            
+            self.collectionView.reloadData()
+        } withCancel: { err in
+             print("ERROR", err)
+        }
+
     }
     
     @objc fileprivate func handleLogOut() {
@@ -57,12 +86,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
-        cell.backgroundColor = .blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! UserProfilePhotoCell
+        cell.post = posts[indexPath.item]
         return cell
     }
     
