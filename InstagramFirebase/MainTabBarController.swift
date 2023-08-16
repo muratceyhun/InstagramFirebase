@@ -21,6 +21,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             let navController = SpecifiedNavController(rootViewController: photoSelectorController)
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
+            return false
         }
         return true
     }
