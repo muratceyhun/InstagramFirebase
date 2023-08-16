@@ -67,7 +67,7 @@ class SharePhotoController: UIViewController {
                 }
                 
                 print("Successfully downloaded to DB", metadata)
-                
+
                 
                 Storage.storage().reference().child("posts").child(filename).downloadURL { imageURL, err in
                     if let err = err {

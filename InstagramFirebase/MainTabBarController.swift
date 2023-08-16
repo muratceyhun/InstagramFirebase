@@ -18,10 +18,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         if index == 2 {
             let layout = UICollectionViewFlowLayout()
             let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
-            let navController2 = SpecifiedNavController(rootViewController: photoSelectorController)
-//            let navController = UINavigationController(rootViewController: photoSelectorController)
-            navController2.modalPresentationStyle = .fullScreen
-            present(navController2, animated: true)
+            let navController = SpecifiedNavController(rootViewController: photoSelectorController)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
         }
         return true
     }
@@ -53,6 +52,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         // Search Screen
             let searchNavController = templateNavController(selectedPhoto: "search_selected", unselectedPhoto: "search_unselected")
+        
+        
         
         // Plus Screen
         

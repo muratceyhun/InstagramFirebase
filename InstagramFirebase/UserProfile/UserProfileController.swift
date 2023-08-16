@@ -24,7 +24,25 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(handleLogOut))
         
-        fetchPosts()
+//        fetchPosts()
+        fetchedOrderedPosts()
+    }
+    
+    fileprivate func fetchedOrderedPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Database.database().reference().child("posts").child(uid)
+        ref.queryOrdered(byChild: "creationDate").observe(.childAdded) { snapshot in
+            print(snapshot.key, snapshot.value)
+            
+            guard let dictionary = snapshot.value as? [String: Any] else {return}
+            let post = Post(dictionary: dictionary)
+            self.posts.append(post)
+            self.collectionView.reloadData()
+            
+        } withCancel: { err in
+            print("Failed to get posts orderly", err)
+        }
+
     }
     
     
