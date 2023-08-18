@@ -7,11 +7,21 @@
 
 import UIKit
 
+
+var imageCache = [String: UIImage]()
+
 class CustomImageView: UIImageView {
     
     var lastURLUsedToLoadImage: String?
+    
+    
     func loadImage(urlString: String) {
         lastURLUsedToLoadImage = urlString
+        
+        if let cachedImage = imageCache[urlString] {
+            self.image = cachedImage
+            return
+        }
         guard let url = URL(string: urlString) else {return}
 
         URLSession.shared.dataTask(with: url) { data, res, err in
@@ -22,12 +32,12 @@ class CustomImageView: UIImageView {
             if url.absoluteString != self.lastURLUsedToLoadImage {
                 return
             }
-//            if url.absoluteString != self.post?.imageURL {
-//                return
-//            }
+
             guard let data = data else {return}
+            let photoImage = UIImage(data: data)
+            imageCache[url.absoluteString] = photoImage
             DispatchQueue.main.async {
-                self.image = UIImage(data: data)
+                self.image = photoImage
 
             }
         }.resume()

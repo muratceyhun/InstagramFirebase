@@ -48,7 +48,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         // Home Screen
         
-        let homeNavController = templateNavController(rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()), selectedPhoto: "home_selected", unselectedPhoto: "home_unselected")
+        let homeNavController = templateNavController(rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()), selectedPhoto: "home_selected", unselectedPhoto: "home_unselected")
         
         
         // Search Screen

@@ -50,15 +50,11 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let ref = Database.database().reference().child("posts").child(uid)
         ref.observeSingleEvent(of: .value) { snapshot in
-//            print(snapshot.value)
             guard let dictionaries = snapshot.value as? [String: Any] else {return}
             dictionaries.forEach { key, value in
                 guard let dictionary = value as? [String: Any] else {return}
-//                let imageURL = dictionary["imageURL"] as? String
-//                print("IMAGE URL:", imageURL)
-//                print("Key :\(key) \n Value :\(value)")
+
                 let post = Post(dictionary: dictionary)
-//                print(post.imageURL)
                 self.posts.append(post)
             }
             
