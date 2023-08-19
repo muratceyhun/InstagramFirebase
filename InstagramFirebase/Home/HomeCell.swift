@@ -14,15 +14,23 @@ class HomeCell: UICollectionViewCell {
             
             guard let postURL = post?.imageURL else {return}
             photoImageView.loadImage(urlString: postURL)
+            usernameLabel.text = post?.user.username
+            guard let profileImageURL = post?.user.profileImageURL else {return}
+            userProfileImageView.loadImage(urlString: profileImageURL)
+//            captionLabel.text = post?.caption
+            setupAttributedCaption()
+
+            
             
         }
     }
     
-    let userProfileImageView: UIImageView = {
-       let userphoto = UIImageView()
+    let userProfileImageView: CustomImageView = {
+       let userphoto = CustomImageView()
         userphoto.backgroundColor = .red
         userphoto.layer.cornerRadius = 40/2
         userphoto.clipsToBounds = true
+//        userphoto.layer.masksToBounds = true
         return userphoto
     }()
     
@@ -73,15 +81,20 @@ class HomeCell: UICollectionViewCell {
     
     let captionLabel: UILabel = {
         let label = UILabel()
-//        label.text = " Something for bla bla bla"
         label.numberOfLines = 0
-        let attrString = NSMutableAttributedString(string: "Username", attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
-        attrString.append(NSAttributedString(string: " Some sentences should be filled up here in order to make examples", attributes: [.font : UIFont.systemFont(ofSize: 14)]))
-        attrString.append(NSAttributedString(string: "\n\n", attributes: [.font : UIFont.systemFont(ofSize: 4)]))
-        attrString.append(NSAttributedString(string: "1 week ago", attributes: [.foregroundColor : UIColor.gray, .font : UIFont.systemFont(ofSize: 14)]))
-        label.attributedText = attrString
         return label
     }()
+    
+    
+    fileprivate func setupAttributedCaption() {
+        guard let post = self.post else {return}
+        
+        let attrString = NSMutableAttributedString(string: post.user.username, attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
+        attrString.append(NSAttributedString(string: " \(post.caption)", attributes: [.font : UIFont.systemFont(ofSize: 14)]))
+        attrString.append(NSAttributedString(string: "\n\n", attributes: [.font : UIFont.systemFont(ofSize: 4)]))
+        attrString.append(NSAttributedString(string: "1 week ago", attributes: [.foregroundColor : UIColor.gray, .font : UIFont.systemFont(ofSize: 14)]))
+        captionLabel.attributedText = attrString
+    }
 
     
     override init(frame: CGRect) {
@@ -100,6 +113,7 @@ class HomeCell: UICollectionViewCell {
         addSubview(stackView)
         addSubview(bookmarkButton)
         addSubview(captionLabel)
+        
         
         
         userProfileImageView.anchor(top: topAnchor, leading: leadingAnchor, trailing: nil, bottom: nil, topPadding: 8, leadingPadding: 8, trailingPadding: 0, bottomPadding: 0, width: 40, height: 40)

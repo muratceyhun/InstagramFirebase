@@ -13,6 +13,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     
     var posts = [Post]()
+    var user: User?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(handleLogOut))
         
-//        fetchPosts()
         fetchedOrderedPosts()
     }
     
@@ -34,9 +35,11 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         ref.queryOrdered(byChild: "creationDate").observe(.childAdded) { snapshot in
             print(snapshot.key, snapshot.value)
             
+            guard let user = self.user else {return}
             guard let dictionary = snapshot.value as? [String: Any] else {return}
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
+            let post = Post(user: user, dictionary: dictionary )
+            self.posts.insert(post, at: 0)
+//            self.posts.append(post)
             self.collectionView.reloadData()
             
         } withCancel: { err in
@@ -45,25 +48,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
 
     }
     
-    
-    fileprivate func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let ref = Database.database().reference().child("posts").child(uid)
-        ref.observeSingleEvent(of: .value) { snapshot in
-            guard let dictionaries = snapshot.value as? [String: Any] else {return}
-            dictionaries.forEach { key, value in
-                guard let dictionary = value as? [String: Any] else {return}
 
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
-            
-            self.collectionView.reloadData()
-        } withCancel: { err in
-             print("ERROR", err)
-        }
-
-    }
     
     @objc fileprivate func handleLogOut() {
         
@@ -122,7 +107,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: width, height: width)
     }
     
-    var user: User?
     fileprivate func fetchUser() {
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -145,14 +129,5 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
 }
 
 
-struct User {
-    let username: String
-    let profileImageURL: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.profileImageURL = dictionary["profilePhotoURL"] as? String ?? ""
-    }
-    
-}
+
 
