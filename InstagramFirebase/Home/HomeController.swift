@@ -61,6 +61,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width, height: 200)
+        var height: CGFloat = 40 + 8 + 8
+        height += view.frame.width
+        height += 50
+        height += 60
+        return .init(width: collectionView.frame.width, height: height)
     }
 }
