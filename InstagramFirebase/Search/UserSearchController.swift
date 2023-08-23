@@ -48,6 +48,7 @@ class UserSearchController: UICollectionViewController,UICollectionViewDelegateF
         
         collectionView.alwaysBounceVertical = true
 //        collectionView.alwaysBounceHorizontal = true
+        collectionView.keyboardDismissMode = .onDrag
         
         fetchUsers()
     }
@@ -60,6 +61,11 @@ class UserSearchController: UICollectionViewController,UICollectionViewDelegateF
             guard let dictionaries = snapshot.value as? [String: Any] else {return}
             
             dictionaries.forEach { key, value in
+                
+                if key == Auth.auth().currentUser?.uid {
+                    print("Found myself, omit from list")
+                    return
+                }
                 
                 guard let userDictionary = value as? [String: Any] else {return}
                 let user = User(uid: key, dictionary: userDictionary)
@@ -94,5 +100,14 @@ class UserSearchController: UICollectionViewController,UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: collectionView.frame.width, height: 66)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let user = filteredUsers[indexPath.item]
+        print(user.username)
+//        searchBar.resignFirstResponder()
+        let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.userID = user.uid
+        navigationController?.pushViewController(userProfileController, animated: true)
     }
 }

@@ -161,8 +161,8 @@
 		43BAA70A2A840C1600FD1D7D /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
-				43BAA70B2A840C2800FD1D7D /* UserProfileHeader.swift */,
 				43B2091B2A8159C200F4C3CE /* UserProfileController.swift */,
+				43BAA70B2A840C2800FD1D7D /* UserProfileHeader.swift */,
 				43E6F3B12A8BF2BB009BE5DB /* UserProfilePhotoCell.swift */,
 			);
 			path = UserProfile;

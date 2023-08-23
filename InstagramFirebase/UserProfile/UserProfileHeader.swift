@@ -23,7 +23,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     let profileImageView: CustomImageView = {
         let imageView = CustomImageView()
-        imageView.backgroundColor = .red
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         //        imageView.layer.masksToBounds = true

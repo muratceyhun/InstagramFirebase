@@ -27,7 +27,6 @@ class HomeCell: UICollectionViewCell {
     
     let userProfileImageView: CustomImageView = {
        let userphoto = CustomImageView()
-        userphoto.backgroundColor = .red
         userphoto.layer.cornerRadius = 40/2
         userphoto.clipsToBounds = true
 //        userphoto.layer.masksToBounds = true

@@ -21,7 +21,6 @@ class SearchCell: UICollectionViewCell {
     
     let profileImageView: CustomImageView = {
        let image = CustomImageView()
-        image.backgroundColor = .red
         image.layer.cornerRadius = 50/2
         image.layer.masksToBounds = true
         return image
