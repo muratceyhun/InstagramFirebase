@@ -52,7 +52,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         
         // Search Screen
-            let searchNavController = templateNavController(selectedPhoto: "search_selected", unselectedPhoto: "search_unselected")
+        
+        let searchNavController = templateNavController(rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()), selectedPhoto: "search_selected", unselectedPhoto: "search_unselected")
         
         
         

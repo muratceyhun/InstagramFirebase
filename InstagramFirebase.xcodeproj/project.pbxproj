@@ -14,6 +14,8 @@
 		43507F252A8571AD00A23B85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43507F242A8571AD00A23B85 /* LoginViewController.swift */; };
 		43A491862A90BF2600F7196B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A491852A90BF2600F7196B /* User.swift */; };
 		43A491882A90EA9F00F7196B /* Firebase Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A491872A90EA9F00F7196B /* Firebase Utils.swift */; };
+		43A4918B2A95402200F7196B /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A4918A2A95402200F7196B /* UserSearchController.swift */; };
+		43A4918D2A95471100F7196B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A4918C2A95471100F7196B /* SearchCell.swift */; };
 		43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709A2A7D5B050020644F /* AppDelegate.swift */; };
 		43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709C2A7D5B050020644F /* SceneDelegate.swift */; };
 		43B0709F2A7D5B050020644F /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0709E2A7D5B050020644F /* SignUpController.swift */; };
@@ -43,6 +45,8 @@
 		43507F242A8571AD00A23B85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		43A491852A90BF2600F7196B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		43A491872A90EA9F00F7196B /* Firebase Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase Utils.swift"; sourceTree = "<group>"; };
+		43A4918A2A95402200F7196B /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
+		43A4918C2A95471100F7196B /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		43B070972A7D5B050020644F /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B0709A2A7D5B050020644F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43B0709C2A7D5B050020644F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		43A491892A95401300F7196B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				43A4918A2A95402200F7196B /* UserSearchController.swift */,
+				43A4918C2A95471100F7196B /* SearchCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		43B0708E2A7D5B050020644F = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +129,7 @@
 		43B070992A7D5B050020644F /* InstagramFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				43A491892A95401300F7196B /* Search */,
 				43E6F3B52A8FC332009BE5DB /* Home */,
 				43E6F3AE2A8BEF6D009BE5DB /* Models */,
 				43B070AE2A7FAD7D0020644F /* Utilities */,
@@ -256,12 +270,14 @@
 				43BAA70C2A840C2800FD1D7D /* UserProfileHeader.swift in Sources */,
 				43B0709B2A7D5B050020644F /* AppDelegate.swift in Sources */,
 				4301F2AB2A87EF1100D48899 /* PhotoSelectorController.swift in Sources */,
+				43A4918D2A95471100F7196B /* SearchCell.swift in Sources */,
 				43E6F3B42A8D1A2C009BE5DB /* CustomImageView.swift in Sources */,
 				43E6F3B02A8BEF91009BE5DB /* Post.swift in Sources */,
 				43B2091C2A8159C200F4C3CE /* UserProfileController.swift in Sources */,
 				43507F252A8571AD00A23B85 /* LoginViewController.swift in Sources */,
 				4301F2B12A89737A00D48899 /* SharePhotoController.swift in Sources */,
 				43B2091A2A81581A00F4C3CE /* MainTabBarController.swift in Sources */,
+				43A4918B2A95402200F7196B /* UserSearchController.swift in Sources */,
 				43B0709D2A7D5B050020644F /* SceneDelegate.swift in Sources */,
 				4301F2AF2A892EFD00D48899 /* PhotoHeader.swift in Sources */,
 				43E6F3B72A8FC33B009BE5DB /* HomeController.swift in Sources */,
