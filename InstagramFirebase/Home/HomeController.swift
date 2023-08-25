@@ -23,7 +23,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.backgroundColor = .white
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellID")
         setupNavigationItems()
-        fetchPosts()
+        fetchPosts()        
+        fetchFollowingUserID()
+       
+
+    }
+    
+    fileprivate func fetchFollowingUserID() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        Database.database().reference().child("following").child(uid).observeSingleEvent(of: .value) { snapshot in
+            print(snapshot)
+            guard let useridDictionary = snapshot.value as? [String: Any] else {return}
+            useridDictionary.forEach { key, value in
+                Database.fetchUserWithUID(uid: key) { user in
+                    self.fetchPostsWithUser(user: user)
+                }
+            }
+        } withCancel: { err in
+            print("Failed to fetch following's posts...", err)
+        }
     }
     
     
@@ -49,6 +67,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let dictionary = value as? [String: Any] else {return}
                 let post = Post(user: user, dictionary: dictionary)
                 self.posts.append(post)
+            }
+            
+            self.posts.sort { p1, p2 in
+                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
             }
             
             self.collectionView.reloadData()

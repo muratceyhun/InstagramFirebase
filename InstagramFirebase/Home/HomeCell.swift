@@ -91,7 +91,11 @@ class HomeCell: UICollectionViewCell {
         let attrString = NSMutableAttributedString(string: post.user.username, attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
         attrString.append(NSAttributedString(string: " \(post.caption)", attributes: [.font : UIFont.systemFont(ofSize: 14)]))
         attrString.append(NSAttributedString(string: "\n\n", attributes: [.font : UIFont.systemFont(ofSize: 4)]))
-        attrString.append(NSAttributedString(string: "1 week ago", attributes: [.foregroundColor : UIColor.gray, .font : UIFont.systemFont(ofSize: 14)]))
+        
+        
+        let timeAgoDisplay = post.creationDate.timeAgoDisplay()
+        
+        attrString.append(NSAttributedString(string: timeAgoDisplay, attributes: [.foregroundColor : UIColor.gray, .font : UIFont.systemFont(ofSize: 14)]))
         captionLabel.attributedText = attrString
     }
 
