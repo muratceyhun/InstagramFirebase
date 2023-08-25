@@ -22,11 +22,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellID")
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshController
         setupNavigationItems()
-        fetchPosts()        
-        fetchFollowingUserID()
+        fetchAllPosts()
        
-
+    }
+    
+    @objc fileprivate func handleRefresh() {
+        print("Refreshing....")
+        posts.removeAll()
+        fetchAllPosts()
+    }
+    
+    fileprivate func fetchAllPosts() {
+        fetchPosts()
+        fetchFollowingUserID()
     }
     
     fileprivate func fetchFollowingUserID() {
@@ -62,6 +74,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let ref = Database.database().reference().child("posts").child(user.uid)
         
         ref.observeSingleEvent(of: .value) { snapshot in
+            self.collectionView.refreshControl?.endRefreshing()
             guard let dictionaries = snapshot.value as? [String: Any] else {return}
             dictionaries.forEach { key, value in
                 guard let dictionary = value as? [String: Any] else {return}
@@ -89,8 +102,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! HomeCell
-        let post = self.posts[indexPath.item]
-        cell.post = post
+        if posts.count > 0 {
+            let post = self.posts[indexPath.item]
+            cell.post = post
+        }
         return cell
     }
     
