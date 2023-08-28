@@ -13,15 +13,22 @@ import FirebaseDatabase
 
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostDelegate {
+    func didTapComment(post: Post) {
+        print(post.caption)
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(commentsController, animated: true)
+    }
     
     
     var posts = [Post]()
+
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
-        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellID")
+        collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: "cellID")
         let refreshController = UIRefreshControl()
         refreshController.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshController
@@ -101,10 +108,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! HomeCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! HomePostCell
         if posts.count > 0 {
             let post = self.posts[indexPath.item]
             cell.post = post
+            cell.delegate = self
         }
         return cell
     }
