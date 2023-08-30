@@ -18,11 +18,11 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .lightGray
         collectionView.keyboardDismissMode = .onDrag
 //        collectionView.contentInset = .init(top: 0, left: 0, bottom: -84, right: 0)
         navigationItem.title = "Comments"
         collectionView.register(CommentCell.self, forCellWithReuseIdentifier: "cellID")
+        collectionView.alwaysBounceVertical = true
         fetchComments()
     }
     
@@ -33,10 +33,15 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         ref.observe(.childAdded) { snapshot in
             
             guard let dictionary = snapshot.value as? [String: Any] else {return}
-            let comment = Comment(dictionary: dictionary)
-//            print(comment.uid, comment.text)
-            self.comments.append(comment)
-            self.collectionView.reloadData()
+            guard let uid = dictionary["uid"] as? String else {return}
+            
+            Database.fetchUserWithUID(uid: uid) { user in
+                let comment = Comment(user: user, dictionary: dictionary)
+                self.comments.append(comment)
+                self.collectionView.reloadData()
+            }
+            
+        
             
         } withCancel: { err in
             print("Failed to fetch comments", err)
@@ -72,6 +77,10 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         containerView.addSubview(submitButton)
         submitButton.anchor(top: containerView.topAnchor, leading: nil, trailing: containerView.trailingAnchor, bottom: containerView.bottomAnchor, topPadding: 0, leadingPadding: 0, trailingPadding: -12, bottomPadding: 0, width: 50, height: 0)
        
+        let separatorView = UIView()
+        separatorView.backgroundColor = UIColor.rgbConverter(red: 210, green: 230, blue: 230, alpha: 1)
+        containerView.addSubview(separatorView)
+        separatorView.anchor(top: containerView.topAnchor, leading: containerView.leadingAnchor, trailing: containerView.trailingAnchor, bottom: nil, topPadding: 0, leadingPadding: 0, trailingPadding: 0, bottomPadding: 0, width: 0, height: 0.6)
     
         containerView.addSubview(commentTextField)
         self.commentTextField.anchor(top: nil, leading: containerView.leadingAnchor, trailing: submitButton.leadingAnchor, bottom: nil, topPadding: 0, leadingPadding: 12, trailingPadding: 0, bottomPadding: 0, width: 0, height: 0)
@@ -130,7 +139,22 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 50)
+        
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        let dummyCell = CommentCell(frame: frame)
+        dummyCell.comment = comments[indexPath.item]
+        dummyCell.layoutIfNeeded()
+        
+        let targetSize = CGSize(width: view.frame.width, height: 1000)
+        let estimatedSize = dummyCell.systemLayoutSizeFitting(targetSize)
+        let height = max(40 + 8 + 8, estimatedSize.height)
+        
+        
+        return .init(width: view.frame.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     

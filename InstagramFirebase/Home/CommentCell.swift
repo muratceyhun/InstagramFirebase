@@ -12,24 +12,43 @@ class CommentCell: UICollectionViewCell {
     var comment: Comment? {
         didSet {
             print(comment?.text ?? "")
-            textLabel.text = comment?.text
+            guard let comment = comment else {return}
+
+            let attrString = NSMutableAttributedString(string: comment.user.username, attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
+            attrString.append(NSAttributedString(string: " " + comment.text, attributes: [.font : UIFont.systemFont(ofSize: 14)]))
+            textLabel.attributedText = attrString
+            profileImageView.loadImage(urlString: comment.user.profileImageURL)
         }
     }
     
     
+    let profileImageView: CustomImageView = {
+       let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 40/2
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
-    let textLabel: UILabel = {
-       let label = UILabel()
-        label.numberOfLines = 0
-        return label
+    
+    
+    let textLabel: UITextView = {
+       let textView = UITextView()
+        textView.isScrollEnabled = false
+//        label.numberOfLines = 0
+        
+        return textView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .brown
         
         addSubview(textLabel)
-        textLabel.anchor(top: topAnchor, leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, topPadding: 0, leadingPadding: 0, trailingPadding: 0, bottomPadding: 0, width: 0, height: 0)
+        addSubview(profileImageView)
+        profileImageView.anchor(top: topAnchor, leading: leadingAnchor, trailing: nil, bottom: nil, topPadding: 8, leadingPadding: 8, trailingPadding: 0, bottomPadding: 0, width: 40, height: 40)
+//        profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        textLabel.anchor(top: topAnchor, leading: profileImageView.trailingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, topPadding: 4, leadingPadding: 4, trailingPadding: -4, bottomPadding: -4, width: 0, height: 0)
+        
     }
     
     required init?(coder: NSCoder) {
