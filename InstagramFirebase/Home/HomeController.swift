@@ -14,18 +14,9 @@ import FirebaseDatabase
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostDelegate {
-    func didTapComment(post: Post) {
-        print(post.caption)
-        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
-        commentsController.post = post
-        navigationController?.pushViewController(commentsController, animated: true)
-    }
-    
     
     var posts = [Post]()
-
-  
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -88,14 +79,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let dictionary = value as? [String: Any] else {return}
                 var post = Post(user: user, dictionary: dictionary)
                 post.id = key
-                self.posts.append(post)
+                
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                Database.database().reference().child("likes").child(key).child(uid).observeSingleEvent(of: .value) { snapshot in
+                    print(snapshot)
+                    
+                    if let value = snapshot.value as? Int, value == 1 {
+                        post.hasLiked = true
+                    } else {
+                        post.hasLiked = false
+                    }
+                    self.posts.append(post)
+                    self.posts.sort { p1, p2 in
+                        return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+                    }
+                    self.collectionView.reloadData()
+                } withCancel: { err in
+                    print("Failed to fetch liked posts",err)
+                }
             }
             
-            self.posts.sort { p1, p2 in
-                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
-            }
             
-            self.collectionView.reloadData()
         } withCancel: { err in
              print("ERROR", err)
         }
@@ -125,5 +129,37 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         height += 50
         height += 60
         return .init(width: collectionView.frame.width, height: height)
+    }
+    
+    
+    func didLike(for cell: HomePostCell) {
+        print("Like from Home Controller")
+        guard let indexPath = collectionView.indexPath(for: cell) else {return}
+        var post = posts[indexPath.item]
+        print(post.caption)
+        
+        
+        guard let postID = post.id else {return}
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let values = [uid: post.hasLiked == true ? 0 : 1]
+        Database.database().reference().child("likes").child(postID).updateChildValues(values) { err, _ in
+            if let err = err {
+                print("Failed to like the post", err)
+                return
+            }
+            print("Successfully liked the post.")
+            print("User id \(uid) like the that post \(postID)")
+            post.hasLiked = !post.hasLiked
+            self.posts[indexPath.item] = post
+            self.collectionView.reloadItems(at: [indexPath])
+        }
+        
+    }
+    
+    func didTapComment(post: Post) {
+        print(post.caption)
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.post = post
+        navigationController?.pushViewController(commentsController, animated: true)
     }
 }
