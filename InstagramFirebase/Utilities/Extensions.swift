@@ -13,7 +13,10 @@ extension UIColor {
     static func rgbConverter(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
         let color = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
         return color
-        
+    }
+    
+    static func mainBlue() -> UIColor {
+       return UIColor.rgbConverter(red: 17, green: 154, blue: 237, alpha: 1)
     }
 }
 

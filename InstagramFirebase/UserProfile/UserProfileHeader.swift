@@ -10,7 +10,16 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+
+protocol UserProfileHeaderDelegate {
+    func didChangeToListView()
+    func didChangeToGridView()
+}
+
 class UserProfileHeader: UICollectionViewCell {
+    
+    
+    var delegate: UserProfileHeaderDelegate?
     
     var user: User? {
         didSet {
@@ -103,17 +112,34 @@ class UserProfileHeader: UICollectionViewCell {
         return imageView
     }()
     
-    let gridButton: UIButton = {
-        let button = UIButton()
+    lazy var gridButton: UIButton = {
+        let button = UIButton(type: .system)
         button.setImage(UIImage(named: "grid"), for: .normal)
+        button.addTarget(self, action: #selector(handleChangeToGridView), for: .touchUpInside)
         return button
     }()
-    let listButton: UIButton = {
-        let button = UIButton()
+    
+    @objc fileprivate func handleChangeToGridView() {
+        gridButton.tintColor = .mainBlue()
+        listButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToGridView()
+    }
+    lazy var listButton: UIButton = {
+        let button = UIButton(type: .system)
         button.setImage(UIImage(named: "list"), for: .normal)
-        button.tintColor = UIColor.red
+        button.tintColor = UIColor(white: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(handleChangeToListView), for: .touchUpInside)
         return button
     }()
+    
+    
+    @objc fileprivate func handleChangeToListView() {
+        listButton.tintColor = .mainBlue()
+        gridButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToListView()
+    }
+    
+    
     let bookmarkButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "ribbon"), for: .normal)
