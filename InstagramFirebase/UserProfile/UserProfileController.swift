@@ -23,7 +23,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     var isGridView = true
-    
+    var isFinishedPaging = false
     var posts = [Post]()
     var user: User?
     var userID: String?
@@ -43,6 +43,56 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
 //        fetchedOrderedPosts()
     }
     
+    fileprivate func paginatePost() {
+        print("Start to paginate...")
+        guard let uid = user?.uid else {return}
+        let ref = Database.database().reference().child("posts").child(uid)
+//        let value = "-Nbyu92BZOYRgiYcY3sW"
+//        let query = ref.queryOrderedByKey().queryStarting(atValue: value).queryLimited(toFirst: 6)
+        
+        var query = ref.queryOrderedByKey()
+        
+        if posts.count > 0 {
+            let value = posts.last?.id
+            query = query.queryStarting(atValue: value)
+        }
+        
+        query.queryLimited(toFirst: 4).observeSingleEvent(of: .value) { snapshot in
+            
+            guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else {return}
+            
+            if allObjects.count < 4 {
+                self.isFinishedPaging = true
+            }
+            
+            if self.posts.count > 0 {
+                allObjects.removeFirst()
+            }
+            
+            guard let user = self.user else {return}
+            
+            allObjects.forEach({ snapshot in
+                guard let dictionary = snapshot.value as?  [String: Any] else {return}
+                var post = Post(user: user, dictionary: dictionary)
+                post.id = snapshot.key
+                self.posts.append(post)
+//                print(snapshot.key)
+                
+                self.posts.forEach { post in
+                    print(post.id ?? "")
+                }
+            })
+            
+            self.collectionView.reloadData()
+            
+            
+        } withCancel: { err in
+            print("Failed to paginate", err)
+        }
+
+        
+    }
+    
     fileprivate func fetchedOrderedPosts() {
         guard let uid = user?.uid else {return}
         let ref = Database.database().reference().child("posts").child(uid)
@@ -51,7 +101,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             guard let user = self.user else {return}
             guard let dictionary = snapshot.value as? [String: Any] else {return}
-            let post = Post(user: user, dictionary: dictionary )
+            let post = Post(user: user, dictionary: dictionary)
             self.posts.insert(post, at: 0)
 //            self.posts.append(post)
             self.collectionView.reloadData()
@@ -105,6 +155,14 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
+        // fire off to the pagination
+        
+        if indexPath.item == posts.count - 1 && !isFinishedPaging {
+            print("paginate for post")
+            paginatePost()
+        }
+        
         if isGridView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! UserProfilePhotoCell
             cell.post = posts[indexPath.item]
@@ -147,7 +205,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.user = user
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
-            self.fetchedOrderedPosts()
+//            self.fetchedOrderedPosts()
+            self.paginatePost()
         }
     
     }
